@@ -34,7 +34,7 @@ describe('javascript-data-types/sort-strings', () => {
     const data = [
       'Соска (пустышка) NUK 10729357',
       'ТВ тюнер D-COLOR  DC1301HD',
-      'Детский велосипед Lexus Trike Racer Trike',
+      'Детский велосипед Lexus Trike Racer Trike  ',
       'Соска (пустышка) Philips SCF182/12',
       'Powerbank аккумулятор Hiper SP20000'
     ];
