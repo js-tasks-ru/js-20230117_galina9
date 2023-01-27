@@ -11,7 +11,7 @@ export function trimSymbols(string, size) {
 
   let arr = [...string];
   let count = 1;
-  
+
   let res = arr.reduce((acc, currentValue) => {
     if (!size) {
       acc = ''
