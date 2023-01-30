@@ -1,4 +1,5 @@
 export default class ColumnChart {
+
   chartHeight = 50;
 
   constructor(
@@ -96,4 +97,5 @@ export default class ColumnChart {
     this.remove();
     // NOTE: удаляем обработчики событий, если они есть
   }
+
 }
