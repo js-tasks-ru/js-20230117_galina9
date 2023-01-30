@@ -20,12 +20,11 @@
       const salesData = [ 30, 40, 20, 80, 35, 15 ];
       const customersData = [ 100, 90, 80, 35, 90, 25 ];
 
-      const ordersChart = new ColumnChart({
-        data: ordersData,
-        label: 'orders',
-        value: 344,
-        link: '#'
-      });
+      const orders = document.getElementById('orders');
+      const sales = document.getElementById('sales');
+      const customers = document.getElementById('customers');
+
+      const ordersChart = new ColumnChart();
 
       const salesChart = new ColumnChart({
         data: salesData,
