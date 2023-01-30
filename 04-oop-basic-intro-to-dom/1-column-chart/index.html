@@ -24,7 +24,12 @@
       const sales = document.getElementById('sales');
       const customers = document.getElementById('customers');
 
-      const ordersChart = new ColumnChart();
+      const ordersChart = new ColumnChart({
+        data: ordersData,
+        label: 'orders',
+        value: 344,
+        link: '#'
+      });
 
       const salesChart = new ColumnChart({
         data: salesData,
