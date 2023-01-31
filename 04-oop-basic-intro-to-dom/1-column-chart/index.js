@@ -2,10 +2,7 @@ export default class ColumnChart {
 
   chartHeight = 50;
 
-  constructor(
-    { data, label, value, link, ...otherProps } =
-    { data: [], label: '', link: '', value: 0, }
-  ) {
+  constructor({ data = [], label = "", value = "", link = "", ...otherProps } = {}) {
     this.data = data;
     this.label = label;
     this.value = value;
@@ -16,26 +13,27 @@ export default class ColumnChart {
   }
 
   render() {
+    this.element = this.getTemplate();
+  }
+
+  getTemplate() {
     const wrapper = document.createElement('div');
     wrapper.classList.add('column-chart', 'column-chart_loading');
     wrapper.style['--chart-height'] = this.chartHeight;
 
     if (this.data?.length) {
-      wrapper.classList.toggle('column-chart_loading');
+      wrapper.classList.remove('column-chart_loading');
     }
 
-    wrapper.innerHTML = this.getTemplate();
-    this.element = wrapper;
-  }
-
-  getTemplate() {
-    return `
+    wrapper.innerHTML = `
       <div class="column-chart__title">
         Total ${ this.label }
         ${ this.getLink() }
       </div>
       <div class="column-chart__container">${ this.getColumnChartTemplate() }</div>
     `;
+
+    return wrapper;
   }
 
   getColumnChartTemplate() {
@@ -47,14 +45,14 @@ export default class ColumnChart {
     `;
   }
 
-  getLink(label = "/sales") {
+  getLink(label) {
     return this.link ? `<a href="${ this.link || label }" class="column-chart__link">View all</a>` : "";
   }
 
   getColumns(data = []) {
-    let columnProps = this.getColumnProps(data);
+    const columnProps = this.getColumnProps(data);
 
-    let chart = columnProps.map(item => {
+    const chart = columnProps.map(item => {
       let {percent, value} = item;
 
       return `<div style="--value: ${ value }" data-tooltip="${ percent }"></div>`;
@@ -65,7 +63,7 @@ export default class ColumnChart {
 
   getColumnProps(data) {
     const maxValue = Math.max(...data);
-    const scale = 50 / maxValue;
+    const scale = this.chartHeight / maxValue;
 
     return data.map(item => {
       return {
@@ -82,11 +80,7 @@ export default class ColumnChart {
   formatHeading(value) {
     const formatValue = new Intl.NumberFormat("en").format(value);
 
-    return !!this.otherProps['formatHeading'] ? this.otherProps.formatHeading(formatValue) : formatValue;
-  }
-
-  initEventListeners() {
-    // NOTE: в данном методе добавляем обработчики событий, если они есть
+    return this.otherProps['formatHeading'] ? this.otherProps.formatHeading(formatValue) : formatValue;
   }
 
   remove() {
