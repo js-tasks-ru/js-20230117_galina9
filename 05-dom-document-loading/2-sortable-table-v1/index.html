@@ -68,6 +68,10 @@
       sortType: 'number'
     },
   ];
+  const root = document.querySelector('#root');
+  const sort = document.querySelector('#sort');
+  const field = document.querySelector('#field');
+  const order = document.querySelector('#order');
 
   const sortableTable = new SortableTable(headerConfig, data);
 

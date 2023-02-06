@@ -3,7 +3,7 @@ export default class NotificationMessage {
   static timerId;
   static notification;
 
-  constructor(message = 'hi', { duration = 1000, type = 'success' } = {}) {
+  constructor(message = '', { duration = 1000, type = 'success' } = {}) {
 
     if (NotificationMessage.notification) {
       NotificationMessage.notification.remove();
