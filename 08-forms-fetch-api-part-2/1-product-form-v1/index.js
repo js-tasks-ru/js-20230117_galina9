@@ -31,12 +31,13 @@ export default class ProductForm {
   async render() {
     const data = await this.loadAllDatas();
 
-    const [categoriesData, productData] = [...data];
+    const [categoriesData, productData] = data;
 
     this.categories = categoriesData;
     this.data = productData;
 
     this.renderForm(...this.data);
+
     if (this.data) {
       this.initEventListeners();
     }
@@ -55,11 +56,8 @@ export default class ProductForm {
   }
 
   initEventListeners() {
-    const {
-      productForm,
-      "sortable-list-container": uploadImage,
-      imageListContainer,
-    } = this.subElements;
+    const { productForm, "sortable-list-container": uploadImage } =
+      this.subElements;
 
     productForm.addEventListener("submit", this.onSubmit);
     uploadImage.addEventListener("click", this.uploadImage);
@@ -92,7 +90,7 @@ export default class ProductForm {
       images.push({ source: img.alt, url: img.src });
     }
 
-    for (let [key1, key2] of formData) {
+    for (const [key1, key2] of formData) {
       switch (key1) {
         case "quantity":
         case "price":
@@ -252,10 +250,10 @@ export default class ProductForm {
     return fetchJson(`${BACKEND_URL}/api/rest/products?id=${id}`);
   }
 
-  dispatchEvent (id) {
+  dispatchEvent(id) {
     const event = this.productId
-      ? new CustomEvent('product-updated', { detail: id })
-      : new CustomEvent('product-saved');
+      ? new CustomEvent("product-updated", { detail: id })
+      : new CustomEvent("product-saved");
 
     this.element.dispatchEvent(event);
   }
