@@ -21,7 +21,7 @@ export default class ProductForm {
   onSubmit = (event) => {
     event.preventDefault();
 
-    this.saveNewData();
+    this.save();
   };
 
   constructor(productId) {
@@ -65,7 +65,7 @@ export default class ProductForm {
     uploadImage.addEventListener("click", this.uploadImage);
   }
 
-  async saveNewData() {
+  async save() {
     const product = this.getProductData();
 
     const result = await fetchJson(`${BACKEND_URL}/api/rest/products`, {
@@ -125,14 +125,14 @@ export default class ProductForm {
         <div class="form-group form-group__half_left">
           <fieldset>
             <label class="form-label">Название товара</label>
-            <input required="" type="text" name="title" class="form-control" placeholder="Название товара" value='${
+            <input required type="text" id="title" name="title" class="form-control" placeholder="Название товара" value='${
               data.title
             }'>
           </fieldset>
         </div>
         <div class="form-group form-group__wide">
           <label class="form-label">Описание товара</label>
-          <textarea required="" class="form-control" name="description" data-element="productDescription" placeholder="Описание товара">${
+          <textarea required class="form-control" id="description" name="description" data-element="productDescription" placeholder="Описание товара">${
             data.description
           }</textarea>
         </div>
@@ -143,7 +143,7 @@ export default class ProductForm {
             ${this.getImagesList()}
             </ul>
           </div>
-          <button type="button" name="uploadImage" class="button-primary-outline"><span>Загрузить</span></button>
+          <button type="button" id="uploadImage" name="uploadImage" class="button-primary-outline"><span>Загрузить</span></button>
         </div>
         <div class="form-group form-group__half_left">
           <label class="form-label">Категория</label>
@@ -152,32 +152,32 @@ export default class ProductForm {
         <div class="form-group form-group__half_left form-group__two-col">
           <fieldset>
             <label class="form-label">Цена ($)</label>
-            <input required="" type="number" name="price" class="form-control" placeholder="100" value="${
+            <input type="number" id="price" name="price" class="form-control" placeholder="100" value="${
               data.price
             }">
           </fieldset>
           <fieldset>
             <label class="form-label">Скидка ($)</label>
-            <input required="" type="number" name="discount" class="form-control" placeholder="0" value="${
+            <input type="number" id="discount" name="discount" class="form-control" placeholder="0" value="${
               data.discount
             }">
           </fieldset>
         </div>
         <div class="form-group form-group__part-half">
             <label class="form-label">Количество</label>
-            <input required="" type="number" class="form-control" name="quantity" placeholder="1" value="${
+            <input type="number" id="quantity" class="form-control" name="quantity" placeholder="1" value="${
               data.quantity
             }">
         </div>
         <div class="form-group form-group__part-half">
           <label class="form-label">Статус</label>
-          <select class="form-control" name="status">
+          <select class="form-control" id="status" name="status">
             <option value="1">Активен</option>
             <option value="0">Неактивен</option>
           </select>
         </div>
         <div class="form-buttons">
-          <button type="submit" name="save" class="button-primary-outline">
+          <button type="submit" id="save" name="save" class="button-primary-outline">
           ${this.productId ? "Сохранить товар" : "Добавить товар"}
           </button>
         </div>
@@ -187,7 +187,7 @@ export default class ProductForm {
 
   getSubCategores() {
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = `<select class="form-control" name="subcategory"></select>`;
+    wrapper.innerHTML = `<select class="form-control" name="subcategory" id="subcategory"></select>`;
 
     const select = wrapper.firstElementChild;
 
